@@ -13,11 +13,25 @@
           type="text"
         >
         </v-text-field>
+        <div class="text-xs-center hidden-sm-and-up">
+          <v-btn color="info">Search</v-btn>
+        </div>
       </v-flex>
     </div>
     <div class="section-result">
-      {{ isLoading }}
       {{ result }}
+    </div>
+
+    <div
+      id="page-layer"
+      v-if="isLoading"
+      v-on:click="closeLayer"
+    >
+      <v-progress-circular
+        class="loading-animation"
+        color="info"
+        indeterminate
+      ></v-progress-circular>
     </div>
   </div>
 
@@ -27,7 +41,6 @@
 
 import { mapGetters } from 'vuex'
 export default {
-
   components: {
   },
   data() {
@@ -47,6 +60,9 @@ export default {
   methods: {
     search() {
       this.$store.dispatch('github/search', {keywords: this.user_input})
+    },
+    closeLayer() {
+      this.$store.commit('setIsLoading', { flag: false });
     }
   },
 }
@@ -63,5 +79,26 @@ export default {
 }
 .has-result {
   height: 40vh;
+}
+
+#page-layer {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(200,200,200,0.4);
+  z-index: 3;
+  .loading-animation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+
+  }
 }
 </style>
