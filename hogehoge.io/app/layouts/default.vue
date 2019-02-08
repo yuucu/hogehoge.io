@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app v-bind:dark="app_dark">
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -28,17 +28,25 @@
       <v-toolbar-side-icon @click="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
       <v-spacer></v-spacer>
+
       <v-toolbar-items class="hidden-xs-and-down">
-        <v-btn flat>Link One</v-btn>
-        <v-btn icon>
-        <v-icon>search</v-icon>
+
+        <v-btn flat>no link</v-btn>
+
+
+        <v-btn
+          nuxt
+          to="/"
+          flat
+          icon
+        >
+          <v-icon>search</v-icon>
         </v-btn>
-        <v-btn icon>
-          <v-icon>apps</v-icon>
+
+        <v-btn icon v-on:click="app_dark = !app_dark">
+          <v-icon>invert_colors</v-icon>
         </v-btn>
-        <v-btn icon>
-          <v-icon>more_vert</v-icon>
-        </v-btn>
+
       </v-toolbar-items>
     </v-toolbar>
 
@@ -65,10 +73,11 @@ export default {
   data() {
     return {
       drawer: false,
+      app_dark: false,
       items: [
         {
-          icon: 'apps',
-          title: 'Welcome',
+          icon: 'home',
+          title: 'home',
           to: '/'
         },
         {
@@ -77,7 +86,7 @@ export default {
           to: '/inspire'
         }
       ],
-      title: 'hogehoge'
+      title: 'hogehoge.io'
     }
   }
 }
