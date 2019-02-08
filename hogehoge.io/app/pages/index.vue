@@ -16,13 +16,20 @@
         >
         </v-text-field>
         <div class="text-xs-center hidden-sm-and-up">
-          <v-btn color="info">Search</v-btn>
+          <v-btn color="info" v-on:click="search">Search</v-btn>
         </div>
       </v-flex>
     </div>
     <div class="section-result">
 
       <div v-if="hasResult">
+
+        <div class="chart-area">
+          <div class="chart-cv">
+            <pie-chart :chart-data="getChartData" :options="options"></pie-chart>
+          </div>
+        </div>
+
         <v-tabs
           color="#555"
           v-model="getFirstKey"
@@ -99,8 +106,12 @@
 <script>
 
 import { mapGetters } from 'vuex'
+import PieChart from '@/components/PieChart.vue'
+import 'chartjs-plugin-labels'
+
 export default {
   components: {
+    PieChart,
   },
   data() {
     return {
@@ -109,6 +120,21 @@ export default {
         { text: 'Repository', sortable: false, align: 'center', value: 'repository' },
         { text: 'file path', sortable: false, align: 'center', value: 'path' },
       ],
+      // グラフオプション
+      options: {
+        responsive: true,
+        plugins: {
+          labels: {
+            render: function(ele) {
+              return ele.label + ' - ' + ele.value
+            },
+            fontSize: 14,
+            fontColor: "#000",
+            // position: "outside"
+          }
+        }
+      }
+
     }
   },
   computed: {
@@ -126,7 +152,11 @@ export default {
     },
     getFirstKey() {
       return this.$store.getters['github/getFirstKey']
-    }
+    },
+    getChartData() {
+      return this.$store.getters['github/getChartData']
+    },
+
   },
   methods: {
     search() {
@@ -165,7 +195,12 @@ export default {
     }
     .card-title {
       margin-left: 8px;
-      .under-line {
+    }
+    .chart-area {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 32px;
+      .chart-cv {
       }
     }
   }

@@ -7,7 +7,29 @@ export const getters = {
   result: (state) => state.result,
   error: (state) => state.error,
   hasResult: (state) => state.result.length > 0,
-  getFirstKey: (state) => state.result[0].keyword
+  getFirstKey: (state) => state.result[0].keyword,
+  getChartData: (state) => {
+    return {
+      labels: state.result.map(function(element, index, self) {
+        return element.keyword
+      }),
+      datasets: [
+        {
+          label: 'github keyword count',
+          data: state.result.map(function(element, index, self) {
+            return element.total_count
+          }),
+          backgroundColor: [
+            '#f7464a',
+            '#46bfbd',
+            '#fdb45c',
+            '#949fb1',
+            '#4d5360'
+          ]
+        }
+      ]
+    }
+  },
 }
 
 export const mutations = {
