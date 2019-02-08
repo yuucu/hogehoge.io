@@ -1,5 +1,16 @@
 <template>
   <div class="wrapper">
+     <v-alert
+      :value="hasError"
+      color="error"
+      icon="warning"
+      dismissible
+      outline
+      transition="fade-transition"
+    >
+      {{ error.error }}
+    </v-alert>
+
     <div class="section-search" v-bind:class="{'has-result': hasResult}">
       <v-flex xs10 sm8>
         <div v-if="!hasResult">
@@ -166,6 +177,9 @@ export default {
     },
     hasResult() {
       return this.$store.getters['github/hasResult']
+    },
+    hasError() {
+      return this.$store.getters['github/hasError']
     },
     getFirstKey() {
       return this.$store.getters['github/getFirstKey']

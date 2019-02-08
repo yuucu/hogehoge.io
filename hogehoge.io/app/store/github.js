@@ -6,7 +6,8 @@ export const state = () => ({
 export const getters = {
   result: (state) => state.result,
   error: (state) => state.error,
-  hasResult: (state) => state.result.length > 0,
+  hasResult: (state) => state.result.length !== 0,
+  hasError: (state) => Object.keys(state.error).length !== 0,
   getFirstKey: (state) => state.result[0].keyword,
   getChartData: (state) => {
     return {
@@ -58,8 +59,11 @@ export const actions = {
       }
       commit('setResult', { result: result } )
     } catch(e) {
-      console.log('Server error...')
-      commit('setError', { error: { 'message': 'Server error....' } } )
+      commit('setError', { error: {
+        'error': e.message,
+        'message': ''
+      }})
+
     }
 
     commit('setIsLoading', { flag: false }, { root: true })

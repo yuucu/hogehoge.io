@@ -1,7 +1,13 @@
 <template>
   <div class="wrapper">
     <div class="section">
-      <p>Please enter keywords with a space separator.</p>
+
+      <p class="caption">
+        <a href="https://github.com/satokibi/hogehoge.io" target="_blank">
+          https://github.com/satokibi/hogehoge.io
+        </a>
+      </p>
+
     </div>
   </div>
 
@@ -16,6 +22,7 @@
   .section {
     height: 80vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
   }
