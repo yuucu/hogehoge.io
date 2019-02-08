@@ -31,8 +31,9 @@
 
       <v-toolbar-items class="hidden-xs-and-down">
 
-        <v-btn flat>no link</v-btn>
-
+        <v-btn icon v-on:click="app_dark = !app_dark">
+          <v-icon>invert_colors</v-icon>
+        </v-btn>
 
         <v-btn
           nuxt
@@ -43,9 +44,15 @@
           <v-icon>search</v-icon>
         </v-btn>
 
-        <v-btn icon v-on:click="app_dark = !app_dark">
-          <v-icon>invert_colors</v-icon>
+        <v-btn
+          nuxt
+          to="/help"
+          flat
+          icon
+        >
+          <v-icon>help_outline</v-icon>
         </v-btn>
+
 
       </v-toolbar-items>
     </v-toolbar>
@@ -81,9 +88,9 @@ export default {
           to: '/'
         },
         {
-          icon: 'bubble_chart',
-          title: 'Inspire',
-          to: '/inspire'
+          icon: 'help',
+          title: 'help',
+          to: '/help'
         }
       ],
       title: 'hogehoge.io'

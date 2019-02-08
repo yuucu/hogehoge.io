@@ -4,12 +4,14 @@
       <v-flex xs10 sm8>
         <div v-if="!hasResult">
           <h3 class="display-1">hogehoge.io</h3>
-          <p>Search how many keywords is used in github code.</p>
+          <p>
+            Search how many keywords is used in github code.
+          </p>
         </div>
         <v-text-field
           flat
           prepend-icon="search"
-          label="Search function name or variable name"
+          label="e.g. foo bar baz"
           v-model="user_input"
           v-on:keyup.enter="search"
           type="text"
@@ -18,16 +20,31 @@
         <div class="text-xs-center hidden-sm-and-up">
           <v-btn color="info" v-on:click="search">Search</v-btn>
         </div>
+
       </v-flex>
     </div>
     <div class="section-result">
 
       <div v-if="hasResult">
 
+
         <div class="chart-area">
-          <div class="chart-cv">
+
+          <v-flex xs10 sm6 md5 my-4>
+            <v-card>
+              <v-divider></v-divider>
+              <v-list dense>
+                <v-list-tile v-for="res in result" :key="res.keyword">
+                  <v-list-tile-content>{{ res.keyword }}: </v-list-tile-content>
+                  <v-list-tile-content class="align-end">{{ res.total_count }}</v-list-tile-content>
+                </v-list-tile>
+              </v-list>
+            </v-card>
+          </v-flex>
+
+          <v-flex xs10 sm6>
             <pie-chart :chart-data="getChartData" :options="options"></pie-chart>
-          </div>
+          </v-flex>
         </div>
 
         <v-tabs
@@ -198,10 +215,9 @@ export default {
     }
     .chart-area {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       margin-bottom: 32px;
-      .chart-cv {
-      }
     }
   }
 
