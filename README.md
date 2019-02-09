@@ -16,6 +16,7 @@ $ docker-compose exec web /bin/ash
 
 ```terminal:コンテナ内
 /app # cd hogehoge.io
+/app/hogehoge.io # npm install
 /app/hogehoge.io # npm run dev
 ```
 
