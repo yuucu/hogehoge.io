@@ -6,7 +6,7 @@
 ## Usage
 
 ```shell
-$ git clone https://github.com/satokibi/hogehoge.io
+$ git clone https://github.com/yuucu/hogehoge.io
 $ cd hogehoge.io
 $ cp dummy.env app.env
 $ vim app.env
